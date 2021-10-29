@@ -47,13 +47,6 @@ public class PyTest extends AbstractRunner {
             scmClient.clone()
             context.stage("PyTest Build") {
                 def goals = Configuration.get("goals")
-                if (context.fileExists("requirements.txt")) {
-                    context.sh "pip install -r requirements.txt"
-                }
-                if (context.fileExists("appinit.py")) {
-                    context.sh "python appinit.py"
-                }
-                
                 context.sh goals
             }
         }
