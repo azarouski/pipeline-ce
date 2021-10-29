@@ -22,6 +22,8 @@ public class PyTest extends AbstractRunner {
             logger.info("PyTest->onPush")
             getScm().clonePush()
             logger.info("to be implemented!")
+            
+            logger.info("goals: " + Configuration.get("goals"))
 //            // [VD] don't remove -U otherwise latest dependencies are not downloaded
 //            compile("-U clean compile test", false)
 //
