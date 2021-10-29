@@ -42,13 +42,14 @@ public class PyTest extends AbstractRunner {
 
     //Methods
     public void build() {
-        //TODO: verify if any maven nodes are available
         context.node("python") {
             logger.info("PyTest->build")
             scmClient.clone()
             context.stage("PyTest Build") {
-                logger.info("to be implemented!")
                 def goals = Configuration.get("goals")
+                if (context.fileExists("requirements.txt")) {
+                    context.sh "pip install -r requirements.txt"
+                }
                 context.sh goals
             }
         }
