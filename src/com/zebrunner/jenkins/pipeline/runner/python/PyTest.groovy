@@ -48,8 +48,8 @@ public class PyTest extends AbstractRunner {
             scmClient.clone()
             context.stage("PyTest Build") {
                 logger.info("to be implemented!")
-                logger.info("goals: " + Configuration.get("goals"))
-                //context.mavenBuild(Configuration.get("goals"), getMavenSettings())
+                def goals = Configuration.get("goals")
+                context.sh goals
             }
         }
     }
