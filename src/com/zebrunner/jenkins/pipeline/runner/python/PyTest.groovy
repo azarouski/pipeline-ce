@@ -50,6 +50,10 @@ public class PyTest extends AbstractRunner {
                 if (context.fileExists("requirements.txt")) {
                     context.sh "pip install -r requirements.txt"
                 }
+                if (context.fileExists("appinit.py")) {
+                    context.sh "python appinit.py"
+                }
+                
                 context.sh goals
             }
         }
