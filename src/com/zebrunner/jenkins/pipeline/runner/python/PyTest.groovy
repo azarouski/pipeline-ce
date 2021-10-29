@@ -23,7 +23,6 @@ public class PyTest extends AbstractRunner {
             getScm().clonePush()
             logger.info("to be implemented!")
             
-            logger.info("goals: " + Configuration.get("goals"))
 //            // [VD] don't remove -U otherwise latest dependencies are not downloaded
 //            compile("-U clean compile test", false)
 //
@@ -49,6 +48,7 @@ public class PyTest extends AbstractRunner {
             scmClient.clone()
             context.stage("PyTest Build") {
                 logger.info("to be implemented!")
+                logger.info("goals: " + Configuration.get("goals"))
                 //context.mavenBuild(Configuration.get("goals"), getMavenSettings())
             }
         }
