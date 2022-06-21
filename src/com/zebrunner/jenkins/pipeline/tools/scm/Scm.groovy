@@ -99,7 +99,9 @@ abstract class Scm implements ISCM {
     public def clone(gitUrl, branch, subFolder) {
         context.stage('Checkout Repository') {
             logger.debug("REPO_URL: ${gitUrl}\n branch: ${branch}")
-            Map scmVars = context.checkout getCheckoutParams(gitUrl, branch, subFolder, true, false, "+refs/heads/${branch}:refs/remotes/origin/${branch}", this.credentialsId)
+            
+            def refSpec = getRefSpec(branch, "+refs/heads/${branch}:refs/remotes/origin/${branch}")
+            Map scmVars = context.checkout getCheckoutParams(gitUrl, branch, subFolder, true, false, refSpec, this.credentialsId)
             return scmVars
         }
     }
@@ -107,8 +109,7 @@ abstract class Scm implements ISCM {
     public def clonePR() {
         context.stage('Checkout Repository') {
             logger.debug("REPO_URL: ${this.repoUrl}\n prRefSpec: ${prRefSpec}\n branchSpec: ${branchSpec()}")
-
-            Map scmVars = context.checkout getCheckoutParams(this.repoUrl, branchSpec(), ".", true, false, prRefSpec, this.credentialsId)
+            Map scmVars = context.checkout getCheckoutParams(this.repoUrl, branchSpec(), ".", true, false, this.prRefSpec, this.credentialsId)
             return scmVars
         }
     }
@@ -117,7 +118,9 @@ abstract class Scm implements ISCM {
         context.stage('Checkout Repository') {
             def branch = Configuration.get("branch")
             logger.debug("REPO_URL: ${this.repoUrl}\n branch: ${branch}")
-            Map scmVars = context.checkout getCheckoutParams(this.repoUrl, branch, null, false, true, "+refs/heads/${branch}:refs/remotes/origin/${branch}", this.credentialsId)
+            
+            def refSpec = getRefSpec(branch, "+refs/heads/${branch}:refs/remotes/origin/${branch}")
+            Map scmVars = context.checkout getCheckoutParams(this.repoUrl, branch, null, false, true, refSpec, this.credentialsId)
             return scmVars
         }
     }
@@ -138,6 +141,18 @@ abstract class Scm implements ISCM {
         }
         
         return checkoutParams
+    }
+    
+    protected def getRefSpec(branch, refSpec) {
+        if (branch.contains("tags")) {
+            // replace heads by tags
+            // "+refs/heads/${branch}:refs/remotes/origin/${branch}"
+            // "+refs/tags/${branch}:refs/remotes/origin/refs/tags/${branch}"
+            // "+refs/tags/${branch}:refs/remotes/origin/${branch}"
+            refSpec.replace("+refs/heads", "+refs/tags")
+        }
+        
+        return refSpec        
     }
 
 }
