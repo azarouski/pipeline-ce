@@ -79,7 +79,7 @@ abstract class Scm implements ISCM {
                 }
             }
 
-            def refSpec = getRefSpec(branch, "+refs/heads/${branch}:refs/remotes/origin/${branch}")
+            def refSpec = getRefSpec(branch)
             Map scmVars = context.checkout getCheckoutParams(gitUrl, branch, null, isShallow, true, refSpec, this.credentialsId)
             Configuration.set("scm_url", gitUrl)
             Configuration.set("scm_branch", branch)
@@ -101,7 +101,7 @@ abstract class Scm implements ISCM {
         context.stage('Checkout Repository') {
             logger.debug("REPO_URL: ${gitUrl}\n branch: ${branch}")
             
-            def refSpec = getRefSpec(branch, "+refs/heads/${branch}:refs/remotes/origin/${branch}")
+            def refSpec = getRefSpec(branch)
             Map scmVars = context.checkout getCheckoutParams(gitUrl, branch, subFolder, true, false, refSpec, this.credentialsId)
             return scmVars
         }
@@ -120,7 +120,7 @@ abstract class Scm implements ISCM {
             def branch = Configuration.get("branch")
             logger.debug("REPO_URL: ${this.repoUrl}\n branch: ${branch}")
             
-            def refSpec = getRefSpec(branch, "+refs/heads/${branch}:refs/remotes/origin/${branch}")
+            def refSpec = getRefSpec(branch)
             Map scmVars = context.checkout getCheckoutParams(this.repoUrl, branch, null, false, true, refSpec, this.credentialsId)
             return scmVars
         }
@@ -144,7 +144,9 @@ abstract class Scm implements ISCM {
         return checkoutParams
     }
     
-    protected def getRefSpec(branch, refSpec) {
+    protected def getRefSpec(branch) {
+        def refSpec = "+refs/heads/${branch}:refs/remotes/origin/${branch}"
+        
         if (branch.contains("tags")) {
             // replace heads by tags
             // "+refs/heads/${branch}:refs/remotes/origin/${branch}"
@@ -154,7 +156,8 @@ abstract class Scm implements ISCM {
             logger.info("updated refSpec to: " + refSpec)
         }
         
-        return refSpec        
+        //return refSpec
+        return null        
     }
 
 }
