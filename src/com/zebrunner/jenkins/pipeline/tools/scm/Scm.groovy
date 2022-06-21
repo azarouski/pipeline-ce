@@ -157,7 +157,7 @@ abstract class Scm implements ISCM {
         }
         
         //return refSpec
-        return null        
+        return "+refs/tags/1.0:refs/remotes/origin/refs/tags/1.0"    
     }
 
 }
