@@ -79,7 +79,8 @@ abstract class Scm implements ISCM {
                 }
             }
 
-            Map scmVars = context.checkout getCheckoutParams(gitUrl, branch, null, isShallow, true, "+refs/heads/${branch}:refs/remotes/origin/${branch}", this.credentialsId)
+            def refSpec = getRefSpec(branch, "+refs/heads/${branch}:refs/remotes/origin/${branch}")
+            Map scmVars = context.checkout getCheckoutParams(gitUrl, branch, null, isShallow, true, refSpec, this.credentialsId)
             Configuration.set("scm_url", gitUrl)
             Configuration.set("scm_branch", branch)
             Configuration.set("scm_commit", scmVars.GIT_COMMIT)
