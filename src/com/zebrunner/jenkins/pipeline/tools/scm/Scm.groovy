@@ -150,6 +150,7 @@ abstract class Scm implements ISCM {
             // "+refs/tags/${branch}:refs/remotes/origin/refs/tags/${branch}"
             // "+refs/tags/${branch}:refs/remotes/origin/${branch}"
             refSpec = refSpec.replace("+refs/heads", "+refs/tags")
+            logger.info("updated refSpec to: " + refSpec)
         }
         
         return refSpec        
