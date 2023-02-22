@@ -57,7 +57,8 @@ public class Runner extends AbstractRunner {
             for (pomFile in context.getPomFiles()) {
                 logger.debug("pomFile: " + pomFile)
                 def sonarGoals = sc.getGoals(isPullRequest)
-                context.mavenBuild("-f ${pomFile} ${goals} ${sonarGoals}", getMavenSettings())
+//                context.mavenBuild("-f ${pomFile} ${goals} ${sonarGoals}", getMavenSettings())
+                context.mavenBuild("-f ${pomFile} ${goals}", getMavenSettings())
             }
         }
     }
