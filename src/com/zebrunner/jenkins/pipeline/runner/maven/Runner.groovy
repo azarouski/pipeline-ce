@@ -31,12 +31,16 @@ public class Runner extends AbstractRunner {
     }
 
     public void onPullRequest() {
+        logger.info("------------> 1")
         def node = context.env[Configuration.ZEBRUNNER_NODE_MAVEN] ? context.env[Configuration.ZEBRUNNER_NODE_MAVEN] : "maven"
-        context.node(node) {
-            logger.info("Runner->onPullRequest")
-            getScm().clonePR()
-            compile("-U clean compile test", true)
-        }
+        logger.info("------------> 2")
+        logger.info(node)
+        logger.info("------------> 3")
+//        context.node(node) {
+//            logger.info("Runner->onPullRequest")
+//            getScm().clonePR()
+//            compile("-U clean compile test", true)
+//        }
     }
 
     //Methods
