@@ -119,7 +119,8 @@ public abstract class BaseObject {
     
     protected String getPipelineLibrary(customPipeline) {
         def zebrunnerPipeline = "Zebrunner-CE@" + context.env[Configuration.ZEBRUNNER_VERSION]
-        
+        logger.info("=-=-=-=-=-")
+        logger.info(context.env[Configuration.ZEBRUNNER_VERSION])
         if ("Zebrunner-CE".equals(customPipeline) || customPipeline.isEmpty()) {
             // no custom private pipeline detected!
             return "@Library(\'${zebrunnerPipeline}\')"
