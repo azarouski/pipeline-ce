@@ -857,7 +857,7 @@ public class TestNG extends Runner {
         context.stage('Results') {
             //publishReport('**/reports/qa/emailable-report.html', "CarinaReport")
             publishReport('**/zebrunner/report.html', "ZebrunnerReport")
-            publishReport('**/cucumber-html-reports/overview-features.html', "CucumberReport")
+            publishReport('**/CucumberReport', "CucumberReport")
             publishReport('**/target/surefire-reports/index.html', 'Full TestNG HTML Report')
             publishReport('**/target/surefire-reports/emailable-report.html', 'TestNG Summary HTML Report')
         }
