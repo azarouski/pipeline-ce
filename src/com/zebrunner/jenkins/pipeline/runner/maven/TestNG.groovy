@@ -886,6 +886,7 @@ public class TestNG extends Runner {
                 }
 
                 context.publishHTML getReportParameters(reportDir, reports[i].name, name)
+                context.input "inp"
             }
         } catch (Exception e) {
             logger.error("Exception occurred while publishing Jenkins report.")
