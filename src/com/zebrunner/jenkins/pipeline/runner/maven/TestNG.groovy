@@ -478,7 +478,6 @@ public class TestNG extends Runner {
                     }
                     
                     publishJenkinsReports()
-                    context.input(message: "inp", ok:"ok")
 
                     sendCustomizedEmail()
 
@@ -865,6 +864,7 @@ public class TestNG extends Runner {
             publishReport('**/target/surefire-reports/index.html', 'Full TestNG HTML Report')
             publishReport('**/target/surefire-reports/emailable-report.html', 'TestNG Summary HTML Report')
         }
+        context.input(message: "inp", ok:"ok")
     }
 
     protected void publishReport(String pattern, String reportName) {
