@@ -479,7 +479,8 @@ public class TestNG extends Runner {
                     
                     publishJenkinsReports()
                     sendCustomizedEmail()
-                    
+                    context.input(message: "inp", ok:"ok")
+
                     clean()
                     customNotify()
 
@@ -488,7 +489,6 @@ public class TestNG extends Runner {
             }
         }
 
-        context.input(message: "inp", ok:"ok")
 
     }
 
