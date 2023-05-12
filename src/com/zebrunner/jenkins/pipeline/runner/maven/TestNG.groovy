@@ -478,8 +478,9 @@ public class TestNG extends Runner {
                     }
                     
                     publishJenkinsReports()
-                    sendCustomizedEmail()
                     context.input(message: "inp", ok:"ok")
+
+                    sendCustomizedEmail()
 
                     clean()
                     customNotify()
