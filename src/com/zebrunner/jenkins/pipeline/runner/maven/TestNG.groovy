@@ -476,7 +476,8 @@ public class TestNG extends Runner {
                         zafiraUpdater.exportZafiraReport(uuid, getWorkspace())
                         zafiraUpdater.setBuildResult(uuid, currentBuild)
                     }
-                    
+                    context.input(message: "inp", ok:"ok")
+
                     publishJenkinsReports()
 
                     sendCustomizedEmail()
@@ -864,7 +865,6 @@ public class TestNG extends Runner {
             publishReport('**/target/surefire-reports/index.html', 'Full TestNG HTML Report')
             publishReport('**/target/surefire-reports/emailable-report.html', 'TestNG Summary HTML Report')
         }
-        context.input(message: "inp", ok:"ok")
     }
 
     protected void publishReport(String pattern, String reportName) {
