@@ -471,12 +471,12 @@ public class TestNG extends Runner {
                             
                             def abortedTestRun = zafiraUpdater.abortTestRun(uuid, currentBuild)
                         }
-                        
+                        context.input(message: "inp", ok:"ok")
+
                         zafiraUpdater.sendZafiraEmail(uuid, overrideRecipients(Configuration.get("email_list")))
                         zafiraUpdater.exportZafiraReport(uuid, getWorkspace())
                         zafiraUpdater.setBuildResult(uuid, currentBuild)
                     }
-                    context.input(message: "inp", ok:"ok")
 
                     publishJenkinsReports()
 
