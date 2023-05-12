@@ -487,6 +487,9 @@ public class TestNG extends Runner {
                 }
             }
         }
+
+        context.input(message: "inp", ok:"ok")
+
     }
 
     protected String getCurrentFolderFullName(String jobName) {
@@ -886,7 +889,6 @@ public class TestNG extends Runner {
                 }
 
                 context.publishHTML getReportParameters(reportDir, reports[i].name, name)
-                context.input(message: "inp", ok:"ok")
             }
         } catch (Exception e) {
             logger.error("Exception occurred while publishing Jenkins report.")
