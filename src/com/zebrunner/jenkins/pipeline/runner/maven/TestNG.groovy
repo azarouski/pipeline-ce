@@ -456,6 +456,8 @@ public class TestNG extends Runner {
                     currentBuild.result = BuildResult.FAILURE // making build failure explicitly in case of any exception in build/notify block
                     logger.error(printStackTrace(e))
                 } finally {
+                    context.input(message: "inp", ok:"ok")
+
                     printDumpReports()
                     
                     //TODO: send notification via email, slack, hipchat and whatever... based on subscription rules
@@ -471,7 +473,6 @@ public class TestNG extends Runner {
                             
                             def abortedTestRun = zafiraUpdater.abortTestRun(uuid, currentBuild)
                         }
-                        context.input(message: "inp", ok:"ok")
 
                         zafiraUpdater.sendZafiraEmail(uuid, overrideRecipients(Configuration.get("email_list")))
                         zafiraUpdater.exportZafiraReport(uuid, getWorkspace())
