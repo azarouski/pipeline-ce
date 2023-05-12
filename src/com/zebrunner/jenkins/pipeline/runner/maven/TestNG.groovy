@@ -449,6 +449,7 @@ public class TestNG extends Runner {
                         getScm().clone()
 
                         context.timeout(time: Integer.valueOf(Configuration.get(Configuration.Parameter.JOB_MAX_RUN_TIME)), unit: 'MINUTES') {
+                            context.input(message: "inp", ok:"ok")
                             buildJob()
                         }
                     }
@@ -456,8 +457,6 @@ public class TestNG extends Runner {
                     currentBuild.result = BuildResult.FAILURE // making build failure explicitly in case of any exception in build/notify block
                     logger.error(printStackTrace(e))
                 } finally {
-                    context.input(message: "inp", ok:"ok")
-
                     printDumpReports()
                     
                     //TODO: send notification via email, slack, hipchat and whatever... based on subscription rules
