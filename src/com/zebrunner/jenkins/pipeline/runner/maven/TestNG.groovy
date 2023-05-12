@@ -449,7 +449,6 @@ public class TestNG extends Runner {
                         getScm().clone()
 
                         context.timeout(time: Integer.valueOf(Configuration.get(Configuration.Parameter.JOB_MAX_RUN_TIME)), unit: 'MINUTES') {
-                            context.input(message: "inp", ok:"ok")
                             buildJob()
                         }
                     }
@@ -616,6 +615,7 @@ public class TestNG extends Runner {
                     def goals = getMavenGoals()
                     def pomFile = getMavenPomFile()
                     context.mavenBuild("-U ${goals} -f ${pomFile}", getMavenSettings())
+                    context.input(message: "inp", ok:"ok")
                 }
             }
         }
