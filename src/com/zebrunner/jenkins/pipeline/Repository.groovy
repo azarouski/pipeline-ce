@@ -8,6 +8,7 @@ import com.zebrunner.jenkins.jobdsl.factory.pipeline.hook.PullRequestJobFactory
 import com.zebrunner.jenkins.jobdsl.factory.pipeline.hook.PushJobFactory
 import com.zebrunner.jenkins.jobdsl.factory.view.ListViewFactory
 import com.zebrunner.jenkins.jobdsl.factory.folder.FolderFactory
+import com.zebrunner.jenkins.pipeline.integration.github.GitHubClient
 import com.zebrunner.jenkins.pipeline.runner.maven.TestNG
 import com.zebrunner.jenkins.pipeline.runner.maven.Runner
 import java.nio.file.Paths
@@ -65,6 +66,17 @@ class Repository extends BaseObject {
                     context.string(name: 'removedJobAction', value: 'DELETE'),
                     context.string(name: 'removedViewAction', value: 'DELETE'),
             ]
+        logger.info("Repository->commentSha")
+        logger.info("scmToken={$scmToken}")
+        def gc = new GitHubClient(context, "https://api.github.com", "Bearer $scmToken")
+        logger.info("new GitHubClient was created")
+        logger.info(gc.toString())
+        logger.info("=> gc")
+
+        gc.commentSha("azarouski/pipeline-ce", "5653026402afe36ca06bd4880046c7a1918a8c4a", "success")
+
+        logger.info("/Repository->/commentSha")
+
     }
 
     public void create() {
