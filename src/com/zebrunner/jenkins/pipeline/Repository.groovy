@@ -70,7 +70,7 @@ class Repository extends BaseObject {
         logger.info("scmToken={$scmToken}")
         def gc = new GitHubClient(context, "https://api.github.com", "Bearer $scmToken")
 
-        gc.commentSha("context", "azarouski/pipeline-ce", "7071aeba813e8d680e16661be66276acceed87e1", "success")
+        gc.commentSha("azarouski/pipeline-ce", "7071aeba813e8d680e16661be66276acceed87e1", "success")
 
         logger.info("/Repository->/commentSha")
 
