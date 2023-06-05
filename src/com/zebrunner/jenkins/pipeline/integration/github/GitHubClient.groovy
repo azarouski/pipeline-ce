@@ -28,9 +28,9 @@ class GitHubClient extends HttpClient {
      * @param targetUrl the target URL to associate with this status. By default 'null'.
      * @url <a href="https://docs.github.com/en/rest/commits/statuses?apiVersion=2022-11-28#create-a-commit-status">GitHub Docs</a>
      */
-    public def commentSha( String context="build", repo, sha1, state, desc=null, targetUrl=null) {
+    public def commentSha( String context="buildd", repo, sha1, state, desc=null, targetUrl=null) {
         JsonBuilder jsonBuilder = new JsonBuilder()
-        jsonBuilder context: "build",
+        jsonBuilder context: context,
                 state: state,
                 description: desc,
                 target_url: targetUrl
