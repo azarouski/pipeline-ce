@@ -100,6 +100,12 @@ public class PullRequestJobFactory extends PipelineFactory {
                             printContributedVariables(isLogLevelActive(Logger.LogLevel.DEBUG))
                             printPostContent(isLogLevelActive(Logger.LogLevel.DEBUG))
                             silentResponse(false)
+                            logger.info("==============================+++")
+                            logger.info(webHookArgs.prFilterText)
+                            logger.info(this.repoUrl)
+                            logger.info(resolveUrl(this.repoUrl))
+                            logger.info(String.format(webHookArgs.prFilterText, resolveUrl(this.repoUrl)))
+                            logger.info("==============================+++")
                             regexpFilterText(String.format(webHookArgs.prFilterText, this.repoUrl))
                             regexpFilterExpression(String.format(webHookArgs.prFilterExpression, this.repoUrl))
                         }
