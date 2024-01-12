@@ -768,14 +768,13 @@ public class TestNG extends Runner {
     
     protected addProviderCapabilities() {
         def provider = getProvider().toLowerCase()
-        def platform = Configuration.get("job_type")
         if ("selenium".equalsIgnoreCase(provider) || "zebrunner".equalsIgnoreCase(provider) || "mcloud".equalsIgnoreCase(provider)) {
             // #190: setup default settings only if no explicit disabler via overrideFields!
             if (!"false".equalsIgnoreCase(Configuration.get("capabilities.enableVideo"))) {
-                Configuration.set("capabilities.enableVideo", "true")
+                Configuration.set("capabilities" + "." + provider + ":" + "enableVideo", "true")
             }
             if (!"false".equalsIgnoreCase(Configuration.get("capabilities.enableLog"))) {
-                Configuration.set("capabilities.enableLog", "true")
+                Configuration.set("capabilities" + "." + provider + ":" + "enableLog", "true")
             }
         }
     }
